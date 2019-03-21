@@ -1,0 +1,62 @@
+<div class="task-container container">
+    <h1>Tasks</h1>
+    <p class="lead">Hello {{data.username}}, you have {{numberNotDone}} tasks of {{data.tasks.length}} to be done.</p>
+    <p class="lead">(Click on the task to complete)</p>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-condensed table-hover">
+          <thead>
+            <tr>
+              <td><b>Task Name</b></td>
+              <td><b>Check Details</b></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of data.tasks">
+              <td
+                [ngClass]="{ 'is-done': task.isDone }"
+                (click)="taskToBeDone(task)">
+                  {{task.name}}
+              </td>
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-info btn-sm"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                  (click)="setModal(task)">Details
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Task Details</h4>
+        </div>
+        <div class="modal-body">
+          <p><b>Task Name: </b>{{modal.name}}.</p>
+          <p><b>Task Priority: </b>{{modal.priority}}.</p>
+          <p><b>Due Date: </b>{{modal.dueDate}}.</p>
+          <p><b>Created By: </b>{{modal.issueBy}}.</p>
+          <p><b>Complete: </b>{{modal.isDone}}.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
